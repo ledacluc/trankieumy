@@ -1,104 +1,92 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Trần Kiều My</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRẦN KIỀU MY</title>
   <style>
     body {
-      margin: 0;
-      height: 100vh;
-      background: radial-gradient(circle, #ffe6f0, #ff99c8);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: 'Segoe UI', sans-serif;
-      overflow: hidden;
-    }
-
-    .heart-container {
-      position: relative;
-      width: 300px;
-      height: 300px;
-      animation: rotate 10s infinite linear;
-      transform-style: preserve-3d;
-    }
-
-    .heart-shape {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) rotateX(0deg);
-    }
-
-    svg {
-      width: 300px;
-      height: 300px;
-      fill: #ff3366;
-      filter: drop-shadow(0 0 20px #ff3366aa);
-    }
-
-    .image-inside {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      overflow: hidden;
-      transform: translate(-50%, -50%);
-      box-shadow: 0 0 20px #ff66aa;
-      animation: glow 2s infinite alternate;
-    }
-
-    .image-inside img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .question-box {
-      position: absolute;
-      bottom: 60px;
+      background-color: #007BFF;
+      font-family: Arial, sans-serif;
       text-align: center;
-      color: #fff;
-      font-size: 1.5em;
-      text-shadow: 0 0 10px #ff66aa;
-      animation: fadeIn 2s ease-in;
+      overflow-x: hidden;
+      transition: background-color 1s ease;
     }
-
-    .buttons {
-      margin-top: 20px;
+    .group-box, #confirm-box, #love-box, #final-message, #sorry-message, #heart3d, #read-more, .small-heart, .sad-face {
+      display: none;
     }
-
-    .btn {
-      padding: 12px 25px;
-      font-size: 1.1em;
-      margin: 10px;
-      border: none;
+    .group-box {
+      border: 2px solid #ccc;
+      padding: 30px;
+      display: inline-block;
+      background: white;
+      margin-top: 100px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      animation: fadeIn 1s ease;
+    }
+    .group-box input {
+      padding: 10px;
+      width: 80%;
+      margin: 10px 0;
+      font-size: 16px;
       border-radius: 8px;
-      cursor: pointer;
+      border: 1px solid #aaa;
     }
-
-    .yes {
-      background-color: #28a745;
-      color: white;
+    .heart-container {
+      width: 200px;
+      height: 180px;
+      margin: 20px auto;
+      transform-style: preserve-3d;
+      animation: rotateHeart 6s linear infinite;
     }
-
-    .no {
-      background-color: #dc3545;
-      color: white;
+    .heart {
+      background-image: url('your-image.jpg');
+      background-size: cover;
+      width: 200px;
+      height: 180px;
+      clip-path: path('M 100 30 C 100 -30, 0 -30, 0 50 C 0 100, 100 170, 100 170 C 100 170, 200 100, 200 50 C 200 -30, 100 -30, 100 30 Z');
+      transform: rotateY(0deg);
     }
-
-    @keyframes rotate {
+    @keyframes rotateHeart {
       0% { transform: rotateY(0deg); }
       100% { transform: rotateY(360deg); }
     }
-
-    @keyframes glow {
-      from { box-shadow: 0 0 10px #fff; }
-      to { box-shadow: 0 0 20px #ff66aa, 0 0 30px #ff99cc; }
+    .button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
     }
-
+    .button-yes { background-color: #e91e63; color: white; }
+    .button-no { background-color: #ccc; color: black; }
+    #i-love-you {
+      font-size: 50px;
+      font-weight: bold;
+      color: red;
+      position: relative;
+      height: 200px;
+    }
+    .small-heart {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: red;
+      clip-path: polygon(50% 0%, 100% 40%, 80% 100%, 50% 80%, 20% 100%, 0% 40%);
+      animation: floatHeart 4s infinite;
+    }
+    @keyframes floatHeart {
+      0% { transform: translateY(0); opacity: 1; }
+      50% { transform: translateY(-30px); opacity: 0.7; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+    .sad-face {
+      font-size: 80px;
+      margin-top: 20px;
+    }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -106,32 +94,116 @@
   </style>
 </head>
 <body>
-  <div class="heart-container">
-    <div class="heart-shape">
-      <svg viewBox="0 0 32 29.6">
-        <path d="M23.6,0c-3.4,0-6.4,2.1-7.6,5.1C14.8,2.1,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4
-        c0,9.1,16,21.2,16,21.2s16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/>
-      </svg>
-    </div>
-    <div class="image-inside">
-      <img src="miki.jpg" alt="TRẦN KIỀU MY">
-    </div>
-    <div class="question-box">
-      <div>Anh có thể làm người yêu em được không?</div>
-      <div class="buttons">
-        <button class="btn yes" onclick="accept()">Có</button>
-        <button class="btn no" onclick="decline()">Không</button>
-      </div>
+  <a href="#" onclick="showForm(); return false;">Bấm vào đây nhé...</a>
+
+  <div class="group-box" id="info-form">
+    <h2>Điền thông tin của em nhé</h2>
+    <input type="text" id="name" placeholder="Họ tên"><br>
+    <input type="date" id="dob"><br>
+    <input type="text" id="hometown" placeholder="Quê quán"><br>
+    <button class="button" onclick="submitInfo()">Gửi</button>
+  </div>
+
+  <div id="heart3d">
+    <div class="heart-container">
+      <div class="heart"></div>
     </div>
   </div>
 
+  <div id="confirm-box">
+    <p>Đây có phải bạn hay không?</p>
+    <button class="button button-yes" onclick="confirmYes()">Yes</button>
+    <button class="button button-no" onclick="confirmNo()">No</button>
+  </div>
+
+  <div id="love-box">
+    <p>Wow, em thật xinh đẹp. Em có thể làm người yêu anh được không?</p>
+    <button class="button button-yes" onclick="finalYes()">Yes</button>
+    <button class="button button-no" onclick="finalNo()">No</button>
+  </div>
+
+  <div id="final-message">
+    <p id="message-1">Hiện tại anh không có điều kiện và hứa cho em được một cuộc sống giàu sang, nhưng anh sẽ cố gắng từng ngày để cho em có được hạnh phúc, sự an toàn... Anh không phải người giỏi ăn nói nên sẽ dùng chính những điều nhỏ nhặt mình biết này để thổ lộ tình cảm của mình.</p>
+    <button class="button" onclick="readMore()" id="read-more">Đọc tiếp</button>
+    <p id="message-2" style="display:none;">Anh hay nói với em là anh sợ bắt đầu một cuộc tình mới vì sợ không người ta chịu khổ , nhưng khi cảm xúc nó đến khi gặp em lý trí của anh lại không kiểm soát được tình yêu đó...Dài rồi nên không nói được thêm, nếu được cho có cơ hội sẽ thổ lộ trước mặt.</p>
+  </div>
+
+  <div id="sorry-message">
+    <p>Có thể là anh đã quá nóng vội. Xin lỗi em vì sự đường đột này. Chắc em cần thời gian , anh sẽ đợi hoặc một khoảng thời gian em có người yêu mới hoặc lấy chồng thì như anh nói anh sẽ cho bản thân mình 1 năm để quên dần em.</p>
+    <div class="sad-face">😢</div>
+  </div>
+
+  <div id="i-love-you"></div>
+
   <script>
-    function accept() {
-      alert("Anh biết ngay mà 💖 Cảm ơn em đã cho anh cơ hội để yêu và che chở cho em mỗi ngày.");
+    function showForm() {
+      document.querySelector('a').style.display = 'none';
+      document.getElementById('info-form').style.display = 'block';
     }
 
-    function decline() {
-      alert("Không sao đâu 😢 Anh vẫn sẽ ở đây, chờ đến khi em sẵn sàng. Vì em xứng đáng được yêu thương theo cách tuyệt vời nhất.");
+    function submitInfo() {
+      const name = document.getElementById('name').value;
+      const dob = document.getElementById('dob').value;
+      const hometown = document.getElementById('hometown').value;
+      if (name && dob && hometown) {
+        document.getElementById('info-form').style.display = 'none';
+        document.getElementById('heart3d').style.display = 'block';
+        setTimeout(() => {
+          document.getElementById('confirm-box').style.display = 'block';
+        }, 1000);
+      } else {
+        alert('Điền đầy đủ thông tin nhé');
+      }
+    }
+
+    function confirmYes() {
+      document.getElementById('confirm-box').style.display = 'none';
+      document.body.style.backgroundColor = '#ffc0cb';
+      document.getElementById('love-box').style.display = 'block';
+    }
+
+    function confirmNo() {
+      document.getElementById('confirm-box').style.display = 'none';
+      document.getElementById('sorry-message').style.display = 'block';
+    }
+
+    function finalYes() {
+      document.getElementById('love-box').style.display = 'none';
+      document.getElementById('final-message').style.display = 'block';
+      document.getElementById('read-more').style.display = 'inline-block';
+      createHearts();
+    }
+
+    function finalNo() {
+      document.getElementById('love-box').style.display = 'none';
+      document.getElementById('sorry-message').style.display = 'block';
+      document.body.style.backgroundColor = '#ccc';
+    }
+
+    function readMore() {
+      document.getElementById('message-2').style.display = 'block';
+      document.getElementById('read-more').style.display = 'none';
+    }
+
+    function createHearts() {
+      const container = document.getElementById('i-love-you');
+      const letters = 'I LOVE YOU'.split('');
+      container.innerHTML = '';
+
+      letters.forEach((char, index) => {
+        const span = document.createElement('span');
+        span.style.position = 'absolute';
+        span.style.left = `${index * 60}px`;
+        span.innerText = char;
+
+        const heart = document.createElement('div');
+        heart.className = 'small-heart';
+        heart.style.top = `${Math.random() * 50 + 60}px`;
+        heart.style.left = `${index * 60 + Math.random() * 20}px`;
+        container.appendChild(heart);
+        container.appendChild(span);
+      });
+      container.style.display = 'block';
     }
   </script>
 </body>
