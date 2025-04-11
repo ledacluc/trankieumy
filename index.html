@@ -35,16 +35,35 @@
       margin: 20px auto;
       color: #e91e63;
     }
+    .image-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px auto;
+      position: relative;
+    }
     .image-container img {
-      width: 200px;
-      height: 200px;
+      width: 220px;
+      height: 220px;
       border-radius: 50%;
       object-fit: cover;
-      box-shadow: 0 0 20px rgba(255, 105, 180, 0.8);
-      margin-bottom: 20px;
+      box-shadow: 0 0 25px rgba(255, 105, 180, 0.8);
+      z-index: 2;
+    }
+    .heart-float {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: url('https://cdn-icons-png.flaticon.com/512/833/833472.png') no-repeat center/contain;
+      animation: floatHeart 6s linear infinite;
+    }
+    @keyframes floatHeart {
+      0% { transform: translateY(100px) scale(0.6); opacity: 0.8; }
+      100% { transform: translateY(-200px) scale(1.2); opacity: 0; }
     }
     .buttons {
       margin-top: 20px;
+      text-align: center;
     }
     .buttons button {
       padding: 10px 20px;
@@ -69,7 +88,7 @@
       margin-top: 30px;
       color: white;
     }
-    .hearts {
+    .hearts, .sakura {
       position: fixed;
       top: 0;
       left: 0;
@@ -90,8 +109,6 @@
       100% { transform: translateY(-10vh); opacity: 0; }
     }
     .sakura {
-      position: fixed;
-      top: -50px;
       width: 20px;
       height: 20px;
       background-image: url('https://pngimg.com/uploads/cherry_blossom/cherry_blossom_PNG85817.png');
@@ -102,7 +119,6 @@
       0% { transform: translateY(0) rotate(0deg); }
       100% { transform: translateY(100vh) rotate(360deg); }
     }
-    /* YouTube player ẩn */
     #ytPlayer {
       display: none;
     }
@@ -116,13 +132,13 @@
   <button onclick="checkName()">OK</button>
 </div>
 
-<!-- 📝 Nhúng video nhạc YouTube (ẩn) -->
+<!-- Nhạc YouTube ẩn -->
 <div id="ytPlayer"></div>
 
 <div class="main hidden" id="mainContent">
-  <div class="image-container">
-    <!-- 📝 THAY ảnh cô ấy tại đây -->
-    <img src="miki.jpg" alt="Miki xinh đẹp">
+  <div class="image-container" id="heartWrapper">
+    <!-- 📝 GẮN ảnh cô ấy tại đây -->
+    <img src="assets/miki.jpg" alt="Miki xinh đẹp">
   </div>
   <div class="typing" id="typingText"></div>
   <div class="buttons">
@@ -144,6 +160,7 @@
       playYoutube();
       createHearts();
       createSakura();
+      createFloatingHearts();
     } else {
       alert("Sai rồi... chỉ có người anh thương mới vào được 💔");
     }
@@ -153,22 +170,38 @@
   let i = 0;
   function startTyping() {
     const typingEl = document.getElementById("typingText");
+    typingEl.textContent = "";
+    typingEl.style.display = "block";
+    i = 0;
     const interval = setInterval(() => {
       typingEl.textContent += text[i];
       i++;
-      if (i >= text.length) clearInterval(interval);
+      if (i >= text.length) {
+        clearInterval(interval);
+        // Ẩn sau 6 giây
+        setTimeout(() => {
+          typingEl.style.display = "none";
+        }, 6000);
+      }
     }, 60);
   }
 
   function showYes() {
+    clearMessages();
     document.getElementById("resultText").textContent =
       "Em đã đồng ý rồi... Anh hứa sẽ luôn bên em mãi mãi 💘";
   }
 
   function showNo() {
+    clearMessages();
     document.body.style.background = "#333";
     document.getElementById("resultText").textContent =
       "Dù em không đồng ý, anh vẫn luôn mong em hạnh phúc 💔";
+  }
+
+  function clearMessages() {
+    document.getElementById("resultText").textContent = "";
+    document.body.style.background = "#ffebf0"; // reset lại màu nền nếu đã đổi
   }
 
   function createHearts() {
@@ -192,6 +225,18 @@
       document.body.appendChild(flower);
       setTimeout(() => flower.remove(), 10000);
     }, 500);
+  }
+
+  function createFloatingHearts() {
+    const wrapper = document.getElementById("heartWrapper");
+    for (let i = 0; i < 10; i++) {
+      const heart = document.createElement("div");
+      heart.classList.add("heart-float");
+      heart.style.left = `${Math.random() * 200 - 50}px`;
+      heart.style.top = `${Math.random() * 150 - 50}px`;
+      heart.style.animationDuration = `${5 + Math.random() * 3}s`;
+      wrapper.appendChild(heart);
+    }
   }
 
   function playYoutube() {
