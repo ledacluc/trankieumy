@@ -32,13 +32,14 @@
     }
 
     #heartImage {
-      width: 280px;
-      height: 280px;
+      width: 360px;
+      height: 320px;
       margin: 0 auto;
       background: url('anh1.jpg') center/cover no-repeat;
-      clip-path: path("M 140 28 C 168 0, 230 20, 230 75 C 230 130, 140 220, 140 220 C 140 220, 50 130, 50 75 C 50 20, 112 0, 140 28 Z");
+      clip-path: path("M 180 60 C 220 0, 320 20, 320 100 C 320 180, 180 280, 180 280 C 180 280, 40 180, 40 100 C 40 20, 140 0, 180 60 Z");
       animation: moveHeart 3s ease-in-out infinite;
     }
+
 
     @keyframes moveHeart {
       0%, 100% { transform: translateX(0); }
