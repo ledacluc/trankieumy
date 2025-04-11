@@ -3,252 +3,312 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cho TRẦN KIỀU MY 💖</title>
+  <title>Tỏ tình cùng Kiều My</title>
   <style>
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Arial', sans-serif;
-      background: #ffebf0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #ffebf0;
+      text-align: center;
       overflow: hidden;
     }
+
     #overlay {
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: #111;
+      background: #fff;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       flex-direction: column;
-      color: white;
       z-index: 10;
     }
-    .hidden {
-      display: none !important;
-    }
-    .typing {
-      font-size: 1.5rem;
-      white-space: pre-wrap;
-      width: 80%;
-      text-align: center;
-      margin: 20px auto;
-      color: #e91e63;
-    }
-    .image-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 20px auto;
+
+    #mainContent {
+      display: none;
+      padding: 20px;
       position: relative;
     }
-    .image-container img {
-      width: 220px;
-      height: 220px;
-      border-radius: 50%;
-      object-fit: cover;
-      box-shadow: 0 0 25px rgba(255, 105, 180, 0.8);
-      z-index: 2;
+
+    #typingText {
+      white-space: pre-wrap;
+      font-size: 20px;
+      color: #d1005d;
+      font-weight: bold;
+      margin-top: 20px;
     }
+
+    .heart {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background-color: pink;
+      transform: rotate(45deg);
+      animation: float 4s linear infinite;
+      opacity: 0.7;
+    }
+
+    .heart::before, .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: pink;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    #heartWrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
     .heart-float {
       position: absolute;
       width: 30px;
       height: 30px;
-      background: url('https://cdn-icons-png.flaticon.com/512/833/833472.png') no-repeat center/contain;
-      animation: floatHeart 6s linear infinite;
+      background-color: red;
+      transform: rotate(45deg);
+      animation: floatUp 6s infinite;
+      opacity: 0.6;
     }
-    @keyframes floatHeart {
-      0% { transform: translateY(100px) scale(0.6); opacity: 0.8; }
-      100% { transform: translateY(-200px) scale(1.2); opacity: 0; }
+
+    .heart-float::before, .heart-float::after {
+      content: "";
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background-color: red;
+      border-radius: 50%;
     }
-    .buttons {
+
+    .heart-float::before {
+      top: -15px;
+      left: 0;
+    }
+
+    .heart-float::after {
+      left: -15px;
+      top: 0;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+      100% { transform: translateY(-200px) rotate(45deg); opacity: 0; }
+    }
+
+    img {
+      max-width: 200px;
+      border-radius: 20px;
+      border: 4px solid #fff;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+
+    #buttons {
       margin-top: 20px;
-      text-align: center;
     }
-    .buttons button {
-      padding: 10px 20px;
-      margin: 0 10px;
-      font-size: 1rem;
+
+    button {
+      margin: 10px;
+      padding: 10px 25px;
+      font-size: 18px;
       border: none;
       border-radius: 10px;
       cursor: pointer;
-      transition: 0.3s;
-    }
-    .yes {
-      background-color: #e91e63;
+      background-color: #ff5da2;
       color: white;
+      transition: 0.3s ease;
     }
-    .no {
-      background-color: #888;
-      color: white;
+
+    button:hover {
+      background-color: #ff397f;
     }
-    .result-text {
-      font-size: 1.8rem;
-      text-align: center;
-      margin-top: 30px;
-      color: white;
-    }
-    .hearts, .sakura {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      overflow: hidden;
-    }
-    .heart {
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      background: url('https://cdn-icons-png.flaticon.com/512/833/833472.png') no-repeat center/contain;
-      animation: float 5s linear infinite;
-    }
-    @keyframes float {
-      0% { transform: translateY(100vh); opacity: 1; }
-      100% { transform: translateY(-10vh); opacity: 0; }
-    }
-    .sakura {
-      width: 20px;
-      height: 20px;
-      background-image: url('https://pngimg.com/uploads/cherry_blossom/cherry_blossom_PNG85817.png');
-      background-size: cover;
-      animation: fall 10s linear infinite;
-    }
-    @keyframes fall {
-      0% { transform: translateY(0) rotate(0deg); }
-      100% { transform: translateY(100vh) rotate(360deg); }
-    }
-    #ytPlayer {
-      display: none;
+
+    #resultText {
+      font-size: 24px;
+      color: #b4004e;
+      margin-top: 40px;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
 
-<div id="overlay">
-  <h2>Nhập tên của em nhé 💌</h2>
-  <input type="text" id="nameInput" placeholder="Nhập tên đầy đủ..." />
-  <button onclick="checkName()">OK</button>
-</div>
-
-<!-- Nhạc YouTube ẩn -->
-<div id="ytPlayer"></div>
-
-<div class="main hidden" id="mainContent">
-  <div class="image-container" id="heartWrapper">
-    <!-- 📝 GẮN ảnh cô ấy tại đây -->
-    <img src="assets/miki.jpg" alt="Miki xinh đẹp">
+  <!-- Bước 1: Nhập tên -->
+  <div id="overlay">
+    <h2>Nhập tên của em đi nè 💌</h2>
+    <input type="text" id="nameInput" placeholder="Tên của em..." style="padding: 10px; font-size: 18px;">
+    <br><br>
+    <button onclick="checkName()">OK</button>
   </div>
-  <div class="typing" id="typingText"></div>
-  <div class="buttons">
-    <button class="yes" onclick="showYes()">EM ĐỒNG Ý 💖</button>
-    <button class="no" onclick="showNo()">EM KHÔNG ĐỒNG Ý 💔</button>
+
+  <!-- Bước 2: Nội dung chính -->
+  <div id="mainContent">
+    <!-- Ảnh cô ấy: thay bằng ảnh của bạn -->
+    <img src="miki.jpg" alt="Ảnh của em" />
+    <div id="heartWrapper"></div>
+
+    <!-- Hiệu ứng đánh máy -->
+    <div id="typingText"></div>
+
+    <!-- Hai nút chọn -->
+    <div id="buttons">
+      <button onclick="showYes()">EM ĐỒNG Ý</button>
+      <button onclick="showNo()">EM KHÔNG ĐỒNG Ý</button>
+    </div>
+
+    <!-- Kết quả -->
+    <div id="resultText"></div>
   </div>
-  <div class="result-text" id="resultText"></div>
-</div>
 
-<div class="hearts" id="hearts"></div>
+  <!-- Chỗ nhúng nhạc YouTube (ẩn) -->
+  <div id="ytPlayer"></div>
 
-<script>
-  function checkName() {
-    const name = document.getElementById("nameInput").value.trim().toUpperCase();
-    if (name === "TRẦN KIỀU MY") {
-      document.getElementById("overlay").classList.add("hidden");
-      document.getElementById("mainContent").classList.remove("hidden");
-      startTyping();
-      playYoutube();
-      createHearts();
-      createSakura();
-      createFloatingHearts();
-    } else {
-      alert("Sai rồi... chỉ có người anh thương mới vào được 💔");
+  <!-- Load YouTube API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+
+  <script>
+    let player;
+
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('ytPlayer', {
+        height: '0',
+        width: '0',
+        videoId: 'Qcm-tqRjfsI', // "Dành cho em"
+        playerVars: {
+          autoplay: 1,
+          loop: 1,
+          playlist: 'Qcm-tqRjfsI',
+          controls: 0,
+          modestbranding: 1,
+          rel: 0
+        },
+        events: {
+          'onReady': function (event) {
+            // sẽ phát khi gọi playYoutube()
+          }
+        }
+      });
     }
-  }
 
-  const text = "Từ lần đầu tiên gặp em...\nAnh đã biết rằng trái tim mình không còn là của riêng anh nữa.";
-  let i = 0;
-  function startTyping() {
-    const typingEl = document.getElementById("typingText");
-    typingEl.textContent = "";
-    typingEl.style.display = "block";
-    i = 0;
-    const interval = setInterval(() => {
-      typingEl.textContent += text[i];
-      i++;
-      if (i >= text.length) {
-        clearInterval(interval);
-        // Ẩn sau 6 giây
-        setTimeout(() => {
-          typingEl.style.display = "none";
-        }, 6000);
+    function playYoutube() {
+      if (player && player.playVideo) {
+        player.playVideo();
       }
-    }, 60);
-  }
-
-  function showYes() {
-    clearMessages();
-    document.getElementById("resultText").textContent =
-      "Em đã đồng ý rồi... Anh hứa sẽ luôn bên em mãi mãi 💘";
-  }
-
-  function showNo() {
-    clearMessages();
-    document.body.style.background = "#333";
-    document.getElementById("resultText").textContent =
-      "Dù em không đồng ý, anh vẫn luôn mong em hạnh phúc 💔";
-  }
-
-  function clearMessages() {
-    document.getElementById("resultText").textContent = "";
-    document.body.style.background = "#ffebf0"; // reset lại màu nền nếu đã đổi
-  }
-
-  function createHearts() {
-    const heartsContainer = document.getElementById("hearts");
-    setInterval(() => {
-      const heart = document.createElement("div");
-      heart.classList.add("heart");
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = 3 + Math.random() * 2 + "s";
-      heartsContainer.appendChild(heart);
-      setTimeout(() => heart.remove(), 5000);
-    }, 300);
-  }
-
-  function createSakura() {
-    setInterval(() => {
-      const flower = document.createElement("div");
-      flower.classList.add("sakura");
-      flower.style.left = Math.random() * window.innerWidth + "px";
-      flower.style.animationDuration = 5 + Math.random() * 5 + "s";
-      document.body.appendChild(flower);
-      setTimeout(() => flower.remove(), 10000);
-    }, 500);
-  }
-
-  function createFloatingHearts() {
-    const wrapper = document.getElementById("heartWrapper");
-    for (let i = 0; i < 10; i++) {
-      const heart = document.createElement("div");
-      heart.classList.add("heart-float");
-      heart.style.left = `${Math.random() * 200 - 50}px`;
-      heart.style.top = `${Math.random() * 150 - 50}px`;
-      heart.style.animationDuration = `${5 + Math.random() * 3}s`;
-      wrapper.appendChild(heart);
     }
-  }
 
-  function playYoutube() {
-    const ytDiv = document.getElementById("ytPlayer");
-    ytDiv.innerHTML = `
-      <iframe 
-        width="0" height="0"
-        src="https://www.youtube.com/embed/Qcm-tqRjfsI?autoplay=1&loop=1&playlist=Qcm-tqRjfsI"
-        frameborder="0" allow="autoplay"
-      ></iframe>`;
-  }
-</script>
+    function checkName() {
+      const name = document.getElementById("nameInput").value.trim().toUpperCase();
+      if (name === "TRẦN KIỀU MY") {
+        document.getElementById("overlay").style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+        startTyping();
+        playYoutube();
+        createHearts();
+        createSakura();
+        createFloatingHearts();
+      } else {
+        alert("Chỉ có người anh thương mới vào được trang này thôi đó 🥺");
+      }
+    }
+
+    const text = "Từ lần đầu tiên gặp em...\nAnh đã biết rằng trái tim mình không còn là của riêng anh nữa.";
+    let i = 0;
+    function startTyping() {
+      const typingEl = document.getElementById("typingText");
+      typingEl.textContent = "";
+      typingEl.style.display = "block";
+      i = 0;
+      const interval = setInterval(() => {
+        typingEl.textContent += text[i];
+        i++;
+        if (i >= text.length) {
+          clearInterval(interval);
+          setTimeout(() => {
+            typingEl.style.display = "none";
+          }, 6000);
+        }
+      }, 60);
+    }
+
+    function showYes() {
+      clearMessages();
+      document.getElementById("resultText").textContent =
+        "Cảm ơn em đã đồng ý. Anh hứa sẽ luôn bên em mãi mãi 💘";
+    }
+
+    function showNo() {
+      clearMessages();
+      document.body.style.background = "#333";
+      document.getElementById("resultText").textContent =
+        "Dù em không đồng ý, anh vẫn luôn mong em hạnh phúc 💔";
+    }
+
+    function clearMessages() {
+      document.getElementById("resultText").textContent = "";
+      document.body.style.background = "#ffebf0";
+    }
+
+    function createHearts() {
+      const heartsContainer = document.getElementById("hearts");
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = 3 + Math.random() * 2 + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+      }, 300);
+    }
+
+    function createSakura() {
+      setInterval(() => {
+        const flower = document.createElement("div");
+        flower.classList.add("sakura");
+        flower.style.left = Math.random() * window.innerWidth + "px";
+        flower.style.animationDuration = 5 + Math.random() * 5 + "s";
+        document.body.appendChild(flower);
+        setTimeout(() => flower.remove(), 10000);
+      }, 500);
+    }
+
+    function createFloatingHearts() {
+      const wrapper = document.getElementById("heartWrapper");
+      for (let i = 0; i < 10; i++) {
+        const heart = document.createElement("div");
+        heart.classList.add("heart-float");
+        heart.style.left = `${Math.random() * 200 - 50}px`;
+        heart.style.top = `${Math.random() * 150 - 50}px`;
+        heart.style.animationDuration = `${5 + Math.random() * 3}s`;
+        wrapper.appendChild(heart);
+      }
+    }
+  </script>
 
 </body>
 </html>
