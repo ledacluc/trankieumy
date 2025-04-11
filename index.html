@@ -1,210 +1,209 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TRẦN KIỀU MY</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cho TRẦN KIỀU MY 💖</title>
   <style>
     body {
-      background-color: #007BFF;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      overflow-x: hidden;
-      transition: background-color 1s ease;
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: #ffebf0;
+      overflow: hidden;
     }
-    .group-box, #confirm-box, #love-box, #final-message, #sorry-message, #heart3d, #read-more, .small-heart, .sad-face {
-      display: none;
+    #overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: white;
+      z-index: 10;
     }
-    .group-box {
-      border: 2px solid #ccc;
-      padding: 30px;
-      display: inline-block;
-      background: white;
-      margin-top: 100px;
-      border-radius: 20px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
-      animation: fadeIn 1s ease;
+    .hidden {
+      display: none !important;
     }
-    .group-box input {
-      padding: 10px;
+    .typing {
+      font-size: 1.5rem;
+      white-space: pre-wrap;
       width: 80%;
-      margin: 10px 0;
-      font-size: 16px;
-      border-radius: 8px;
-      border: 1px solid #aaa;
-    }
-    .heart-container {
-      width: 200px;
-      height: 180px;
+      text-align: center;
       margin: 20px auto;
-      transform-style: preserve-3d;
-      animation: rotateHeart 6s linear infinite;
+      color: #e91e63;
     }
-    .heart {
-      background-image: url('your-image.jpg');
-      background-size: cover;
+    .image-container img {
       width: 200px;
-      height: 180px;
-      clip-path: path('M 100 30 C 100 -30, 0 -30, 0 50 C 0 100, 100 170, 100 170 C 100 170, 200 100, 200 50 C 200 -30, 100 -30, 100 30 Z');
-      transform: rotateY(0deg);
-    }
-    @keyframes rotateHeart {
-      0% { transform: rotateY(0deg); }
-      100% { transform: rotateY(360deg); }
-    }
-    .button {
-      padding: 10px 20px;
-      margin: 10px;
-      font-size: 16px;
-      cursor: pointer;
-      border: none;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-    }
-    .button-yes { background-color: #e91e63; color: white; }
-    .button-no { background-color: #ccc; color: black; }
-    #i-love-you {
-      font-size: 50px;
-      font-weight: bold;
-      color: red;
-      position: relative;
       height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.8);
+      margin-bottom: 20px;
     }
-    .small-heart {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background: red;
-      clip-path: polygon(50% 0%, 100% 40%, 80% 100%, 50% 80%, 20% 100%, 0% 40%);
-      animation: floatHeart 4s infinite;
-    }
-    @keyframes floatHeart {
-      0% { transform: translateY(0); opacity: 1; }
-      50% { transform: translateY(-30px); opacity: 0.7; }
-      100% { transform: translateY(0); opacity: 1; }
-    }
-    .sad-face {
-      font-size: 80px;
+    .buttons {
       margin-top: 20px;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .buttons button {
+      padding: 10px 20px;
+      margin: 0 10px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .yes {
+      background-color: #e91e63;
+      color: white;
+    }
+    .no {
+      background-color: #888;
+      color: white;
+    }
+    .result-text {
+      font-size: 1.8rem;
+      text-align: center;
+      margin-top: 30px;
+      color: white;
+    }
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .heart {
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      background: url('https://cdn-icons-png.flaticon.com/512/833/833472.png') no-repeat center/contain;
+      animation: float 5s linear infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(100vh); opacity: 1; }
+      100% { transform: translateY(-10vh); opacity: 0; }
+    }
+    .sakura {
+      position: fixed;
+      top: -50px;
+      width: 20px;
+      height: 20px;
+      background-image: url('https://pngimg.com/uploads/cherry_blossom/cherry_blossom_PNG85817.png');
+      background-size: cover;
+      animation: fall 10s linear infinite;
+    }
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(100vh) rotate(360deg); }
+    }
+    /* YouTube player ẩn */
+    #ytPlayer {
+      display: none;
     }
   </style>
 </head>
 <body>
-  <a href="#" onclick="showForm(); return false;">Bấm vào đây nhé...</a>
 
-  <div class="group-box" id="info-form">
-    <h2>Điền thông tin của em nhé</h2>
-    <input type="text" id="name" placeholder="Họ tên"><br>
-    <input type="date" id="dob"><br>
-    <input type="text" id="hometown" placeholder="Quê quán"><br>
-    <button class="button" onclick="submitInfo()">Gửi</button>
+<div id="overlay">
+  <h2>Nhập tên của em nhé 💌</h2>
+  <input type="text" id="nameInput" placeholder="Nhập tên đầy đủ..." />
+  <button onclick="checkName()">OK</button>
+</div>
+
+<!-- 📝 Nhúng video nhạc YouTube (ẩn) -->
+<div id="ytPlayer"></div>
+
+<div class="main hidden" id="mainContent">
+  <div class="image-container">
+    <!-- 📝 THAY ảnh cô ấy tại đây -->
+    <img src="miki.jpg" alt="Miki xinh đẹp">
   </div>
-
-  <div id="heart3d">
-    <div class="heart-container">
-      <div class="heart"></div>
-    </div>
+  <div class="typing" id="typingText"></div>
+  <div class="buttons">
+    <button class="yes" onclick="showYes()">EM ĐỒNG Ý 💖</button>
+    <button class="no" onclick="showNo()">EM KHÔNG ĐỒNG Ý 💔</button>
   </div>
+  <div class="result-text" id="resultText"></div>
+</div>
 
-  <div id="confirm-box">
-    <p>Đây có phải bạn hay không?</p>
-    <button class="button button-yes" onclick="confirmYes()">Yes</button>
-    <button class="button button-no" onclick="confirmNo()">No</button>
-  </div>
+<div class="hearts" id="hearts"></div>
 
-  <div id="love-box">
-    <p>Wow, em thật xinh đẹp. Em có thể làm người yêu anh được không?</p>
-    <button class="button button-yes" onclick="finalYes()">Yes</button>
-    <button class="button button-no" onclick="finalNo()">No</button>
-  </div>
-
-  <div id="final-message">
-    <p id="message-1">Hiện tại anh không có điều kiện và hứa cho em được một cuộc sống giàu sang, nhưng anh sẽ cố gắng từng ngày để cho em có được hạnh phúc, sự an toàn... Anh không phải người giỏi ăn nói nên sẽ dùng chính những điều nhỏ nhặt mình biết này để thổ lộ tình cảm của mình.</p>
-    <button class="button" onclick="readMore()" id="read-more">Đọc tiếp</button>
-    <p id="message-2" style="display:none;">Anh hay nói với em là anh sợ bắt đầu một cuộc tình mới vì sợ không người ta chịu khổ , nhưng khi cảm xúc nó đến khi gặp em lý trí của anh lại không kiểm soát được tình yêu đó...Dài rồi nên không nói được thêm, nếu được cho có cơ hội sẽ thổ lộ trước mặt.</p>
-  </div>
-
-  <div id="sorry-message">
-    <p>Có thể là anh đã quá nóng vội. Xin lỗi em vì sự đường đột này. Chắc em cần thời gian , anh sẽ đợi hoặc một khoảng thời gian em có người yêu mới hoặc lấy chồng thì như anh nói anh sẽ cho bản thân mình 1 năm để quên dần em.</p>
-    <div class="sad-face">😢</div>
-  </div>
-
-  <div id="i-love-you"></div>
-
-  <script>
-    function showForm() {
-      document.querySelector('a').style.display = 'none';
-      document.getElementById('info-form').style.display = 'block';
-    }
-
-    function submitInfo() {
-      const name = document.getElementById('name').value;
-      const dob = document.getElementById('dob').value;
-      const hometown = document.getElementById('hometown').value;
-      if (name && dob && hometown) {
-        document.getElementById('info-form').style.display = 'none';
-        document.getElementById('heart3d').style.display = 'block';
-        setTimeout(() => {
-          document.getElementById('confirm-box').style.display = 'block';
-        }, 1000);
-      } else {
-        alert('Điền đầy đủ thông tin nhé');
-      }
-    }
-
-    function confirmYes() {
-      document.getElementById('confirm-box').style.display = 'none';
-      document.body.style.backgroundColor = '#ffc0cb';
-      document.getElementById('love-box').style.display = 'block';
-    }
-
-    function confirmNo() {
-      document.getElementById('confirm-box').style.display = 'none';
-      document.getElementById('sorry-message').style.display = 'block';
-    }
-
-    function finalYes() {
-      document.getElementById('love-box').style.display = 'none';
-      document.getElementById('final-message').style.display = 'block';
-      document.getElementById('read-more').style.display = 'inline-block';
+<script>
+  function checkName() {
+    const name = document.getElementById("nameInput").value.trim().toUpperCase();
+    if (name === "TRẦN KIỀU MY") {
+      document.getElementById("overlay").classList.add("hidden");
+      document.getElementById("mainContent").classList.remove("hidden");
+      startTyping();
+      playYoutube();
       createHearts();
+      createSakura();
+    } else {
+      alert("Sai rồi... chỉ có người anh thương mới vào được 💔");
     }
+  }
 
-    function finalNo() {
-      document.getElementById('love-box').style.display = 'none';
-      document.getElementById('sorry-message').style.display = 'block';
-      document.body.style.backgroundColor = '#ccc';
-    }
+  const text = "Từ lần đầu tiên gặp em...\nAnh đã biết rằng trái tim mình không còn là của riêng anh nữa.";
+  let i = 0;
+  function startTyping() {
+    const typingEl = document.getElementById("typingText");
+    const interval = setInterval(() => {
+      typingEl.textContent += text[i];
+      i++;
+      if (i >= text.length) clearInterval(interval);
+    }, 60);
+  }
 
-    function readMore() {
-      document.getElementById('message-2').style.display = 'block';
-      document.getElementById('read-more').style.display = 'none';
-    }
+  function showYes() {
+    document.getElementById("resultText").textContent =
+      "Em đã đồng ý rồi... Anh hứa sẽ luôn bên em mãi mãi 💘";
+  }
 
-    function createHearts() {
-      const container = document.getElementById('i-love-you');
-      const letters = 'I LOVE YOU'.split('');
-      container.innerHTML = '';
+  function showNo() {
+    document.body.style.background = "#333";
+    document.getElementById("resultText").textContent =
+      "Dù em không đồng ý, anh vẫn luôn mong em hạnh phúc 💔";
+  }
 
-      letters.forEach((char, index) => {
-        const span = document.createElement('span');
-        span.style.position = 'absolute';
-        span.style.left = `${index * 60}px`;
-        span.innerText = char;
+  function createHearts() {
+    const heartsContainer = document.getElementById("hearts");
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 3 + Math.random() * 2 + "s";
+      heartsContainer.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }, 300);
+  }
 
-        const heart = document.createElement('div');
-        heart.className = 'small-heart';
-        heart.style.top = `${Math.random() * 50 + 60}px`;
-        heart.style.left = `${index * 60 + Math.random() * 20}px`;
-        container.appendChild(heart);
-        container.appendChild(span);
-      });
-      container.style.display = 'block';
-    }
-  </script>
+  function createSakura() {
+    setInterval(() => {
+      const flower = document.createElement("div");
+      flower.classList.add("sakura");
+      flower.style.left = Math.random() * window.innerWidth + "px";
+      flower.style.animationDuration = 5 + Math.random() * 5 + "s";
+      document.body.appendChild(flower);
+      setTimeout(() => flower.remove(), 10000);
+    }, 500);
+  }
+
+  function playYoutube() {
+    const ytDiv = document.getElementById("ytPlayer");
+    ytDiv.innerHTML = `
+      <iframe 
+        width="0" height="0"
+        src="https://www.youtube.com/embed/Qcm-tqRjfsI?autoplay=1&loop=1&playlist=Qcm-tqRjfsI"
+        frameborder="0" allow="autoplay"
+      ></iframe>`;
+  }
+</script>
+
 </body>
 </html>
