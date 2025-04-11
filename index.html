@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trần Kiều My</title>
+  <title>Trầnrần Kiều My</title>
   <style>
     body {
       margin: 0;
@@ -18,7 +18,7 @@
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: #fff;
+      background: linear-gradient(to right, #ffdde1, #ee9ca7);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -35,7 +35,7 @@
       width: 280px;
       height: 280px;
       margin: 0 auto;
-      background: url('/image/tkm.jpg') center/cover no-repeat;
+      background: url('/tkm.jpg') center/cover no-repeat;
       clip-path: path("M 140 28 C 168 0, 230 20, 230 75 C 230 130, 140 220, 140 220 C 140 220, 50 130, 50 75 C 50 20, 112 0, 140 28 Z");
       animation: moveHeart 3s ease-in-out infinite;
     }
@@ -71,26 +71,30 @@
       margin-top: 30px;
     }
     .btns button {
-      padding: 10px 20px;
+      padding: 10px 25px;
       font-size: 18px;
       border: none;
-      border-radius: 10px;
+      border-radius: 15px;
       margin: 0 10px;
       cursor: pointer;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
     }
-    .yes-btn { background-color: #ff5da2; color: white; }
-    .no-btn { background-color: #ccc; color: #333; }
+    .btns button:hover {
+      transform: scale(1.05);
+    }
+    .yes-btn { background: linear-gradient(135deg, #ff4081, #ff80ab); color: white; }
+    .no-btn { background-color: #9e9e9e; color: white; }
 
     #resultText, #finalText, #rejectedText2 {
       margin-top: 25px;
       font-size: 18px;
       font-weight: bold;
-      color: #880e4f;
       white-space: pre-wrap;
       padding: 0 10px;
     }
 
-    #rejectedText2 { display: none; }
+    #rejectedText2 { display: none; color: #6a1b9a; }
 
     #finalText { display: none; color: #e91e63; }
 
@@ -122,20 +126,20 @@
     <h2>💌 Nhập tên đầy đủ của em đi nè 💌</h2>
     <input type="text" id="nameInput" placeholder="VD: Trần Kiều My" style="padding: 10px; font-size: 16px;">
     <br><br>
-    <button onclick="checkName()">OK</button>
+    <button onclick="checkName()" style="padding: 10px 20px; background: linear-gradient(135deg, #ff4081, #ff80ab); color: white; border: none; border-radius: 10px;">OK</button>
   </div>
 
   <div id="mainContent">
     <div id="heartImage"></div>
-    <div id="waveText">🌟 Xin chào cô gái cung BẢO BÌNH 🌟</div>
+    <div id="waveText">🌟 XIN CHÀO CÔ GÁI cung BẢO BÌNH 🌟</div>
     <div id="textBlock" class="text-block">
       Anh không biết anh đã thích em và rồi yêu em lúc nào không hay 💖
       Em luôn nói có thể anh không chịu được tính của em 😅 nhưng với anh đó là cá tính 🌈
       Yêu là yêu cả con người và tính cách của đối phương ✨
     </div>
-    <button id="moreBtn" onclick="showMore1()">Đọc tiếp...</button>
+    <button id="moreBtn" onclick="showMore1()" style="background-color: #ffd54f; border: none; border-radius: 10px; padding: 10px 20px; font-weight: bold;">Đọc tiếp...</button>
     <div id="moreText1" class="text-block" style="display:none;"></div>
-    <button id="moreBtn2" onclick="showMore2()" style="display:none;">Đọc tiếp...</button>
+    <button id="moreBtn2" onclick="showMore2()" style="display:none; background-color: #ffd54f; border: none; border-radius: 10px; padding: 10px 20px; font-weight: bold;">Đọc tiếp...</button>
     <div id="moreText2" class="text-block" style="display:none;"></div>
 
     <div class="btns" id="actionBtns" style="display:none;">
@@ -186,6 +190,7 @@
     }
 
     function acceptedLove() {
+      document.body.style.background = "#fff0f5";
       document.getElementById("resultText").innerHTML =
         "CÁM ƠN EM đã Đồng ý 🥹\n\n" +
         "Anh không có điều kiện nhưng anh hứa sẽ làm hết khả năng để yêu thương và lo cho em 💕";
@@ -199,6 +204,7 @@
         "Hãy lưu lại trang web này, vì nó sẽ mãi là minh chứng cho ngày đặc biệt hôm nay.\n" +
         "Mãi yêu em 💗";
       document.getElementById("extraMessage").style.display = "block";
+      document.getElementById("rejectedText2").style.display = "none";
       launchFireworks();
     }
 
