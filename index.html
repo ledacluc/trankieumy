@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tỏ tình với Kiều My</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trần Kiều My</title>
   <style>
     body {
       margin: 0;
+      padding: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-color: #ffe6ec;
+      background-color: #fff0f5;
       text-align: center;
-      overflow: hidden;
+      overflow-x: hidden;
     }
 
     #overlay {
@@ -19,285 +20,235 @@
       width: 100%; height: 100%;
       background: #fff;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
-      z-index: 10;
-    }
-
-    input {
-      padding: 10px;
-      font-size: 18px;
+      z-index: 999;
     }
 
     #mainContent {
       display: none;
-      padding: 20px;
-      position: relative;
+      padding: 15px;
     }
 
-    .heart-frame {
-      width: 300px;
-      height: 300px;
-      background: pink;
-      position: relative;
+    #heartImage {
+      width: 280px;
+      height: 280px;
       margin: 0 auto;
-      animation: swing 3s ease-in-out infinite;
-      transform: rotate(45deg);
-      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      background: url('/image/tkm.jpg') center/cover no-repeat;
+      clip-path: path("M 140 28 C 168 0, 230 20, 230 75 C 230 130, 140 220, 140 220 C 140 220, 50 130, 50 75 C 50 20, 112 0, 140 28 Z");
+      animation: moveHeart 3s ease-in-out infinite;
     }
 
-    .heart-frame::before,
-    .heart-frame::after {
-      content: "";
-      position: absolute;
-      width: 300px;
-      height: 300px;
-      background: pink;
-      border-radius: 50%;
+    @keyframes moveHeart {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(20px); }
     }
 
-    .heart-frame::before {
-      top: -150px;
-      left: 0;
-    }
-
-    .heart-frame::after {
-      left: -150px;
-      top: 0;
-    }
-
-    @keyframes swing {
-      0% { transform: rotate(45deg) translateX(0); }
-      50% { transform: rotate(45deg) translateX(20px); }
-      100% { transform: rotate(45deg) translateX(0); }
-    }
-
-    .heart-frame img {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%) rotate(-45deg);
-      width: 200px;
-      border-radius: 20px;
-      border: 4px solid #fff;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    }
-
-    #typingText {
-      white-space: pre-wrap;
-      font-size: 20px;
-      color: #d1005d;
-      font-weight: bold;
+    .text-block {
       margin-top: 20px;
-    }
-
-    .heart {
-      position: fixed;
-      width: 20px;
-      height: 20px;
-      background-color: pink;
-      transform: rotate(45deg);
-      animation: float 4s linear infinite;
-      opacity: 0.7;
-    }
-
-    .heart::before, .heart::after {
-      content: "";
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background-color: pink;
-      border-radius: 50%;
-    }
-
-    .heart::before {
-      top: -10px;
-      left: 0;
-    }
-
-    .heart::after {
-      left: -10px;
-      top: 0;
-    }
-
-    @keyframes float {
-      0% { transform: translateY(0) rotate(45deg); opacity: 1; }
-      100% { transform: translateY(-100vh) rotate(45deg); opacity: 0; }
-    }
-
-    button {
-      margin: 10px;
-      padding: 10px 25px;
       font-size: 18px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      background-color: #ff5da2;
-      color: white;
-      transition: 0.3s ease;
-    }
-
-    button:hover {
-      background-color: #ff397f;
-    }
-
-    #resultText {
-      font-size: 24px;
-      color: #b4004e;
-      margin-top: 20px;
+      color: #c2185b;
       font-weight: bold;
+      padding: 0 10px;
+      line-height: 1.6;
     }
 
-    #loveText {
-      margin-top: 40px;
-      font-size: 32px;
-      color: #ff1493;
+    #waveText {
+      font-size: 30px;
       font-weight: bold;
-      display: none;
+      color: #ff4081;
+      text-shadow: 2px 2px 0 #fff, 4px 4px 10px #ff8abf;
       animation: wave 2s infinite ease-in-out;
-      text-shadow: 2px 2px 8px rgba(255, 0, 128, 0.6);
     }
 
     @keyframes wave {
-      0% { transform: translateY(0); }
+      0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
-      100% { transform: translateY(0); }
     }
 
-    #moreText {
-      font-size: 20px;
-      margin-top: 20px;
-      color: #88003c;
-      display: none;
-      white-space: pre-wrap;
+    .btns {
+      margin-top: 30px;
     }
+    .btns button {
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      margin: 0 10px;
+      cursor: pointer;
+    }
+    .yes-btn { background-color: #ff5da2; color: white; }
+    .no-btn { background-color: #ccc; color: #333; }
+
+    #resultText, #finalText, #rejectedText2 {
+      margin-top: 25px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #880e4f;
+      white-space: pre-wrap;
+      padding: 0 10px;
+    }
+
+    #rejectedText2 { display: none; }
+
+    #finalText { display: none; color: #e91e63; }
+
+    #fireworksCanvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 998;
+      display: none;
+    }
+
+    #extraMessage {
+      display: none;
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #4a148c;
+      padding: 0 10px;
+    }
+
+    audio { display: none; }
   </style>
 </head>
 <body>
+  <canvas id="fireworksCanvas"></canvas>
 
   <div id="overlay">
-    <h2>Nhập tên của em đi nè 💌</h2>
-    <input type="text" id="nameInput" placeholder="Tên của em...">
+    <h2>💌 Nhập tên đầy đủ của em đi nè 💌</h2>
+    <input type="text" id="nameInput" placeholder="VD: Trần Kiều My" style="padding: 10px; font-size: 16px;">
     <br><br>
     <button onclick="checkName()">OK</button>
   </div>
 
   <div id="mainContent">
-    <div class="heart-frame">
-      <img src="miki.jpg" alt="Ảnh của em" />
+    <div id="heartImage"></div>
+    <div id="waveText">🌟 Xin chào cô gái cung BẢO BÌNH 🌟</div>
+    <div id="textBlock" class="text-block">
+      Anh không biết anh đã thích em và rồi yêu em lúc nào không hay 💖
+      Em luôn nói có thể anh không chịu được tính của em 😅 nhưng với anh đó là cá tính 🌈
+      Yêu là yêu cả con người và tính cách của đối phương ✨
     </div>
+    <button id="moreBtn" onclick="showMore1()">Đọc tiếp...</button>
+    <div id="moreText1" class="text-block" style="display:none;"></div>
+    <button id="moreBtn2" onclick="showMore2()" style="display:none;">Đọc tiếp...</button>
+    <div id="moreText2" class="text-block" style="display:none;"></div>
 
-    <div id="typingText"></div>
-
-    <div>
-      <button onclick="showYes()">EM ĐỒNG Ý</button>
-      <button onclick="showNo()">EM KHÔNG ĐỒNG Ý</button>
+    <div class="btns" id="actionBtns" style="display:none;">
+      <button class="yes-btn" onclick="acceptedLove()">Em Đồng Ý 💞</button>
+      <button class="no-btn" onclick="rejectedLove()">Không Đồng Ý 💔</button>
     </div>
 
     <div id="resultText"></div>
-    <div id="loveText">I LOVE YOU – cô gái cung BẢO BÌNH 💖</div>
-    <button id="readMoreBtn" style="display:none" onclick="showMoreText()">Đọc tiếp...</button>
-    <div id="moreText">Từ ngày biết em, anh đã thay đổi. Em khiến mọi điều trở nên đẹp đẽ hơn. Anh muốn cùng em đi qua những ngày mưa lẫn ngày nắng. 💞</div>
+    <div id="finalText"></div>
+    <div id="rejectedText2"></div>
+    <div id="extraMessage"></div>
   </div>
 
-  <div id="ytPlayer"></div>
+  <audio id="bgMusic" src="music.mp3.mp3" loop autoplay></audio>
 
-  <script src="https://www.youtube.com/iframe_api"></script>
   <script>
-    let player;
-
-    function onYouTubeIframeAPIReady() {
-      player = new YT.Player('ytPlayer', {
-        height: '0',
-        width: '0',
-        videoId: 'XReDCnLbA8w',
-        playerVars: {
-          autoplay: 0,
-          loop: 1,
-          playlist: 'XReDCnLbA8w',
-          controls: 0,
-          modestbranding: 1,
-          rel: 0
-        },
-        events: {
-          'onReady': () => {}
-        }
-      });
-    }
-
-    function playYoutube() {
-      if (player && player.playVideo) {
-        player.mute();
-        player.playVideo();
-        setTimeout(() => player.unMute(), 2000);
-      }
-    }
-
     function checkName() {
       const name = document.getElementById("nameInput").value.trim().toUpperCase();
       if (name === "TRẦN KIỀU MY") {
         document.getElementById("overlay").style.display = "none";
         document.getElementById("mainContent").style.display = "block";
-        startTyping();
-        playYoutube();
-        createHearts();
+        document.getElementById("bgMusic").play();
       } else {
-        alert("Bạn không phải là cô ấy rồi 😢 (Gợi ý: TRẦN KIỀU MY)");
+        alert("Bạn không phải người cô ấy !!! Gợi ý: \"Trần Kiều My\"");
       }
     }
 
-    const text = "Từ lần đầu tiên gặp em...\nAnh đã biết rằng trái tim mình không còn là của riêng anh nữa.";
-    let i = 0;
-    function startTyping() {
-      const typingEl = document.getElementById("typingText");
-      typingEl.textContent = "";
-      i = 0;
-      const interval = setInterval(() => {
-        typingEl.textContent += text[i];
-        i++;
-        if (i >= text.length) clearInterval(interval);
-      }, 60);
+    function showMore1() {
+      document.getElementById("moreText1").innerHTML =
+        "Anh hiện tại trong tay chưa có gì ngoài sự khó khăn và sự chân thành này 🙇‍♂️\n" +
+        "Nhưng anh sẽ cố gắng mỗi ngày để em không bao giờ phải cô đơn 💪\n" +
+        "Vì em xứng đáng có được hạnh phúc nhất 🥰\n\n" +
+        "Anh không có điều kiện, không giỏi nói chuyện...\n" +
+        "Nên đây là cách anh thể hiện tình cảm của kẻ khờ này ❤️";
+      document.getElementById("moreBtn").style.display = "none";
+      document.getElementById("moreText1").style.display = "block";
+      document.getElementById("moreBtn2").style.display = "inline-block";
     }
 
-    function showYes() {
-      clearMessages();
-      document.getElementById("resultText").textContent =
-        "Cảm ơn em đã đồng ý. Anh hứa sẽ luôn bên em mãi mãi 💘";
-      document.getElementById("loveText").style.display = "block";
-      document.getElementById("readMoreBtn").style.display = "inline-block";
+    function showMore2() {
+      document.getElementById("moreText1").style.display = "none";
+      document.getElementById("moreBtn2").style.display = "none";
+      document.getElementById("moreText2").innerHTML =
+        "Hiện tại, anh sẽ là người yêu em đơn phương một phía từ anh 💘\n\n" +
+        "Còn em có đồng ý không thì hãy bấm nút bên dưới nhé... !! ANH YÊU EM 💓";
+      document.getElementById("moreText2").style.display = "block";
+      document.getElementById("actionBtns").style.display = "block";
     }
 
-    function showNo() {
-      clearMessages();
-      document.body.style.background = "#444";
-      document.getElementById("resultText").textContent =
-        "Dù em không đồng ý, anh vẫn luôn mong em hạnh phúc 💔";
+    function acceptedLove() {
+      document.getElementById("resultText").innerHTML =
+        "CÁM ƠN EM đã Đồng ý 🥹\n\n" +
+        "Anh không có điều kiện nhưng anh hứa sẽ làm hết khả năng để yêu thương và lo cho em 💕";
+      document.getElementById("finalText").style.display = "block";
+      document.getElementById("finalText").innerHTML =
+        "Tình cảm của anh không lớn lao như biển cả,\n" +
+        "Cũng không sặc sỡ như pháo hoa.\n" +
+        "Chỉ là mỗi ngày đều âm thầm nhớ em,\n" +
+        "Và mong một ngày có thể nắm tay em đi đến cuối cuộc đời 🌹💖";
+      document.getElementById("extraMessage").innerHTML =
+        "Hãy lưu lại trang web này, vì nó sẽ mãi là minh chứng cho ngày đặc biệt hôm nay.\n" +
+        "Mãi yêu em 💗";
+      document.getElementById("extraMessage").style.display = "block";
+      launchFireworks();
     }
 
-    function showMoreText() {
-      document.getElementById("moreText").style.display = "block";
-      document.getElementById("readMoreBtn").style.display = "none";
+    function rejectedLove() {
+      document.body.style.background = "#ccc";
+      document.getElementById("resultText").innerHTML = "";
+      document.getElementById("rejectedText2").style.display = "block";
+      document.getElementById("rejectedText2").innerText =
+        "Dù thế nào Anh cũng cám ơn em đọc hết cái nhảm nhí này 🙏\n" +
+        "Cũng là công sức và chút tâm tư tâm huyết anh dành cho nó ❤️\n\n" +
+        "Anh sẽ chờ !!! hoặc 1 năm học cách quên em nếu em tìm được người yêu mới hoặc người chồng mới.\n" +
+        "1 năm như cách anh đã nói ngày 23/3 - Chúc em luôn mỉm cười vui tươi và xinh đẹp 😇";
     }
 
-    function clearMessages() {
-      document.getElementById("resultText").textContent = "";
-      document.getElementById("loveText").style.display = "none";
-      document.getElementById("readMoreBtn").style.display = "none";
-      document.getElementById("moreText").style.display = "none";
-      document.body.style.background = "#ffe6ec";
-    }
+    function launchFireworks() {
+      const canvas = document.getElementById("fireworksCanvas");
+      const ctx = canvas.getContext("2d");
+      canvas.style.display = "block";
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
 
-    function createHearts() {
-      setInterval(() => {
-        const heart = document.createElement("div");
-        heart.classList.add("heart");
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = 3 + Math.random() * 2 + "s";
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 5000);
-      }, 300);
+      let particles = [];
+      for (let i = 0; i < 100; i++) {
+        particles.push({
+          x: canvas.width / 2,
+          y: canvas.height / 2,
+          radius: Math.random() * 3 + 1,
+          dx: (Math.random() - 0.5) * 8,
+          dy: (Math.random() - 0.5) * 8,
+          life: 100
+        });
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = "hsl(" + Math.random() * 360 + ", 100%, 60%)";
+          ctx.fill();
+          p.x += p.dx;
+          p.y += p.dy;
+          p.life--;
+        });
+        particles = particles.filter(p => p.life > 0);
+        if (particles.length > 0) requestAnimationFrame(animate);
+        else canvas.style.display = "none";
+      }
+      animate();
     }
   </script>
-
 </body>
 </html>
